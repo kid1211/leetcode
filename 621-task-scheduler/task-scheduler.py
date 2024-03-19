@@ -13,10 +13,9 @@ class Solution:
             # check wait list
             # only do once
             # print(res, wl[0] if wl else None, wl[0][0] <= len(res) if wl else None)
-            while wl and wl[0][0] <= len(res):
+            if wl and wl[0][0] <= len(res):
                 _, remainCount, task = wl.popleft()
                 heappush(heap, (-remainCount, task))
-            # print(res, heap, wl)
             if not heap and wl:
                 res += [None]
                 continue
