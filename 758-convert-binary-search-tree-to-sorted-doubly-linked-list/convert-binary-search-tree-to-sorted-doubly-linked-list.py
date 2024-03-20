@@ -33,7 +33,5 @@ class Solution:
             last.right = first
         if first:
             first.left = last
-        
-        node = first
 
         return first
