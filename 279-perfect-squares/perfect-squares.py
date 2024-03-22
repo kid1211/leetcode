@@ -8,8 +8,8 @@ class Solution:
                 return remain in sqrt_nums
             
             for num in sqrt_nums:
-                # if remain < num:
-                #     break
+                if remain < num:
+                    continue
     
                 if dfs(remain - num, ans - 1):
                     return True
