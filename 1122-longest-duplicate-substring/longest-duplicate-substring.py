@@ -8,7 +8,7 @@ class Solution:
             hashVal %= sys.maxsize // PRIME
             return hashVal
 
-        
+        @cache
         def checkAnswer(k):
             rolling = 0
 
@@ -29,18 +29,16 @@ class Solution:
             return -1
         
         left, right = 1, len(s) - 1
-        lastCorrect = {}
+
         while left + 1 < right:
             mid = (left + right) // 2
-            tmp = checkAnswer(mid)
-            if tmp != -1:
+            if checkAnswer(mid) != -1:
                 left = mid
-                lastCorrect[mid] = tmp
             else:
                 right = mid
         
-        tmp_left = checkAnswer(left) if left not in lastCorrect else lastCorrect[left]
-        tmp_right = checkAnswer(right) if right not in lastCorrect else lastCorrect[right]
+        tmp_left = checkAnswer(left)
+        tmp_right = checkAnswer(right)
         
         if tmp_right != -1:
             return s[tmp_right:tmp_right + right]
