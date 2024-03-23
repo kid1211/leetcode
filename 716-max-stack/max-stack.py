@@ -4,31 +4,35 @@ class MaxStack:
 
     def __init__(self):
         self.stack = SortedList()
-        self.values = SortedList()
+        self.value = SortedList()
         self.cnt = 0
 
     def push(self, x: int) -> None:
-        self.stack.add((self.cnt, x))
-        self.values.add((x, self.cnt))
+        self.stack += [(self.cnt, x)]
+        self.value += [(x, self.cnt)]
         self.cnt += 1
 
     def pop(self) -> int:
-        idx, val = self.stack.pop()
-        self.values.remove((val, idx))
-        self.cnt -= 1
-        return val
+        stackItem = self.stack.pop()
+        self.value.remove(stackItem[::-1])
+        return stackItem[1]
 
     def top(self) -> int:
         return self.stack[-1][1]
 
     def peekMax(self) -> int:
-        return self.values[-1][0]
-
+        return self.value[-1][0]
+        
     def popMax(self) -> int:
-        val, idx = self.values.pop()
-        self.stack.remove((idx, val))
-        return val
+        valueItem = self.value.pop()
+        self.stack.remove(valueItem[::-1])
+        return valueItem[0]
 
-# SortedList
-# add O(logn)
-# remove O(log(n))
+
+# Your MaxStack object will be instantiated and called as such:
+# obj = MaxStack()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.peekMax()
+# param_5 = obj.popMax()
