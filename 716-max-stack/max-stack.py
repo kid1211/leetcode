@@ -15,6 +15,7 @@ class MaxStack:
     def pop(self) -> int:
         idx, val = self.stack.pop()
         self.values.remove((val, idx))
+        self.cnt -= 1
         return val
 
     def top(self) -> int:
