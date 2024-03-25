@@ -5,13 +5,12 @@ class Solution:
             res = []
             while left < right:
                 if res and nums[left] == nums[left - 1]:
-                    print('huh')
                     left += 1
                     continue
                 if res and nums[right] == nums[right + 1]:
-                    print('what')
                     right -= 1
                     continue
+
                 tmp = nums[left] + nums[right] + target
 
                 if tmp == 0:
