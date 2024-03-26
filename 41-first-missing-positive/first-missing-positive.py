@@ -2,29 +2,29 @@ class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
         n = len(nums)
 
-        def isContainOne():
-            contain_one = False
-
+        def hasOne():
+            hasOne = False
             for i in range(n):
                 if nums[i] == 1:
-                    contain_one = True
-                if nums[i] <= 0 or nums[i] > n:
+                    hasOne = True
+                elif nums[i] > n or nums[i] <= 0:
                     nums[i] = 1
-            return contain_one
+
+            return hasOne
         
-        if not isContainOne():
+        if not hasOne():
             return 1
         
         for i in range(n):
-            value = abs(nums[i])
-
-            if value == n:
+            val = abs(nums[i])
+            # 1 is present, nums[i] == 1, we want nums[1] be negative
+            # -2 is present, nums[i] == abs(-2), we want to makr nums[2]
+            if val == n:
                 nums[0] = - abs(nums[0])
             else:
-                nums[value] = -abs(nums[value])
-        
+                nums[val] = -abs(nums[val])
+
         for i in range(1, n):
             if nums[i] > 0:
                 return i
-        
         return n if nums[0] > 0 else n + 1
