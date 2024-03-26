@@ -1,9 +1,17 @@
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
-        dp = [1] * len(nums)
-        for i in range(1, len(nums)):
-            for j in range(i):
-                if nums[i] > nums[j]:
-                    dp[i] = max(dp[i], dp[j] + 1)
+        
+        @cache
+        def dfs(lastNum, start):
+            if start >= len(nums):
+                return 0
+            
+            # skip current
+            res = 0
+            for i in range(start, len(nums)):
+                if nums[i] > lastNum:
+                    res = max(res, dfs(nums[i], i + 1) + 1)
+            
+            return res
 
-        return max(dp)
+        return dfs(-sys.maxsize, 0)
