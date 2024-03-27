@@ -16,8 +16,8 @@ class Solution:
             else:
                 left = mid
         
-        print(left, right, len(self.blacklist))
-        print('2', k, k + left, + 1, k + right + 1)
+        # print(left, right, len(self.blacklist))
+        # print('2', k, k + left, + 1, k + right + 1)
 
         if left >= len(self.blacklist):
             return k
