@@ -13,6 +13,11 @@ class Solution:
                 left += 1
 
             if rolling < k:
-                # print(right, left, nums[left:right + 1])
                 res += (right - left + 1)
         return res
+# [10,5,2,6]
+# k = 100
+# [10]
+# [10, 5]
+# [5, 2]
+# [5, 2, 6]
