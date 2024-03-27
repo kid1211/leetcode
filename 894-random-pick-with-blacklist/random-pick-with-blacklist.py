@@ -11,10 +11,10 @@ class Solution:
         while left + 1 < right:
             mid = (left + right) // 2 # +1?
             #find the largest blacklist[mid] less than the W[k]
-            if self.blacklist[mid] > k + mid:
-                right = mid
-            else:
+            if self.blacklist[mid] <= k + mid:
                 left = mid
+            else:
+                right = mid
         
         # print(left, right, len(self.blacklist))
         # print('2', k, k + left, + 1, k + right + 1)
