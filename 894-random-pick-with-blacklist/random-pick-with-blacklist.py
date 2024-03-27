@@ -11,7 +11,7 @@ class Solution:
         while left + 1 < right:
             mid = (left + right) // 2 # +1?
             #find the largest blacklist[mid] less than the W[k]
-            if self.blacklist[mid] - mid > k:
+            if self.blacklist[mid] > k + mid:
                 right = mid
             else:
                 left = mid
@@ -22,9 +22,9 @@ class Solution:
         if left >= len(self.blacklist):
             return k
 
-        if self.blacklist[right] - right <= k:
+        if self.blacklist[right] <= k + right:
             return k + right + 1
-        elif self.blacklist[left] - left <= k:
+        elif self.blacklist[left] <= k + left:
             return k + left + 1
         return k
 
