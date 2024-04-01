@@ -6,15 +6,15 @@ class Solution:
 
         tmp = []
         for start, end, height in buildings:
-            tmp += [(start, (start, end), height, False)]
-            tmp += [(end, (start, end), height, True)]
+            tmp += [(start, end, height, False)]
+            tmp += [(end, end, height, True)]
         
 
         for pos, key, height, isEnd in sorted(tmp):
             if isEnd:
                 removeList = []
                 for stack_height, stack_key in stack:
-                    if pos >= stack_key[1]:
+                    if pos >= stack_key:
                         removeList += [(stack_height, stack_key)]
                 for item in removeList:
                     stack.remove(item)
@@ -31,5 +31,3 @@ class Solution:
                 res += [[pos, currHeight]]
 
         return res
-
-[[0,3,3],[1,5,3],[2,4,3],[3,7,3]]
