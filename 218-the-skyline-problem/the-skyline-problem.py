@@ -2,14 +2,13 @@ from sortedcontainers import SortedList
 class Solution:
     def getSkyline(self, buildings: List[List[int]]) -> List[List[int]]:
         stack = SortedList()
-        res = []
 
         tmp = []
         for start, end, height in buildings:
             tmp += [(start, end, height)]
             tmp += [(end, end, height)]
-        
 
+        res = []
         for pos, currHeight_end, height in sorted(tmp):
             if pos == currHeight_end: # represent ending
                 removeList = []
