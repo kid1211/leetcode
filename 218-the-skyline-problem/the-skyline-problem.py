@@ -12,13 +12,12 @@ class Solution:
 
         for pos, key, height, isEnd in sorted(tmp):
             if isEnd:
-                shouldContinue = True
-                while stack and shouldContinue:
-                    for stack_height, stack_key in stack:
-                        if pos >= stack_key[1]:
-                            stack.remove((stack_height, stack_key))
-                            break
-                    shouldContinue = False
+                removeList = []
+                for stack_height, stack_key in stack:
+                    if pos >= stack_key[1]:
+                        removeList += [(stack_height, stack_key)]
+                for item in removeList:
+                    stack.remove(item)
             else:
                 stack += [(height, key)]
             # print(pos, key, isEnd, stack)
@@ -35,20 +34,16 @@ class Solution:
         
             while res and res[-1][0] == pos:
                 _, prevHeight = res.pop()
-    
-                if not currHeight:
-                    currHeight = max(currHeight, prevHeight)
-
-            # if not stack and isEnd:
-            #     currHeight = 0
-    
-            res += [[pos, currHeight]]
+                currHeight = max(currHeight, prevHeight)
+            # res += [[pos, currHeight]]
             
-            while res and res[-1][1] == currHeight:
-                prevPos, _ = res.pop()
-                pos = min(prevPos, pos)
+            # while res and res[-1][1] == currHeight:
+            #     prevPos, _ = res.pop()
+            #     pos = min(prevPos, pos)
 
-            res += [[pos, currHeight]]
+            # res += [[pos, currHeight]]
+            if not res or res[-1][1] != currHeight:
+                res += [[pos, currHeight]]
 
         return res
 
