@@ -6,12 +6,12 @@ class Solution:
 
         tmp = []
         for start, end, height in buildings:
-            tmp += [(start, end, height, False)]
-            tmp += [(end, end, height, True)]
+            tmp += [(start, end, height)]
+            tmp += [(end, end, height)]
         
 
-        for pos, currHeight_end, height, isEnd in sorted(tmp):
-            if isEnd:
+        for pos, currHeight_end, height in sorted(tmp):
+            if pos == currHeight_end: # represent ending
                 removeList = []
                 for stack_height, height_end in stack:
                     if pos >= height_end:
