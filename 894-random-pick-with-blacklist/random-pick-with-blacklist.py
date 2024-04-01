@@ -17,13 +17,6 @@ class Solution:
                 left = mid
             else:
                 right = mid
-        
-        # if self.l and k >= self.l[-1]:
-        #     print(k, k + len(self.l))
-        #     return k + len(self.l)
-        
-        # if right >= len(self.l):
-        #     return k + len(self.l)
 
         if self.l[right] - right <= k:
             # print('right', right + k + 1)
