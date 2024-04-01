@@ -10,16 +10,18 @@ class Solution:
             tmp += [(end, end, height, True)]
         
 
-        for pos, key, height, isEnd in sorted(tmp):
+        for pos, currHeight_end, height, isEnd in sorted(tmp):
             if isEnd:
-                removeList = []
-                for stack_height, stack_key in stack:
-                    if pos >= stack_key:
-                        removeList += [(stack_height, stack_key)]
-                for item in removeList:
-                    stack.remove(item)
+                stack = SortedList([item for item in stack if pos < item[1]])
+                # removeList = []
+                # newStack = 
+                # for stack_height, height_end in stack:
+                #     if pos >= height_end:
+                #         removeList += [(stack_height, height_end)]
+                # for item in removeList:
+                #     stack.remove(item)
             else:
-                stack += [(height, key)]
+                stack += [(height, currHeight_end)]
             # Make sure Stack is correct
 
             currHeight = stack[-1][0] if stack else 0
