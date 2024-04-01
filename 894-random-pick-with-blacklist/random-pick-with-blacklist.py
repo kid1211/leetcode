@@ -1,34 +1,53 @@
 class Solution:
 
     def __init__(self, n: int, blacklist: List[int]):
-        self.b = sorted(blacklist)
+        self.l = sorted(blacklist)
         self.n = n
 
     def pick(self) -> int:
-        k = random.randint(0, self.n - len(self.b) - 1) # exclusive
-        left, right = 0, len(self.b) - 1
-
+        k = random.randint(0, self.n - len(self.l) - 1)
+        if not self.l:
+            return k
+        left, right = 0, len(self.l) - 1
+        
         while left + 1 < right:
             mid = (left + right) // 2
 
-            if self.b[mid] - mid <= k:
+            if self.l[mid] - mid <= k:
                 left = mid
             else:
                 right = mid
         
-        if left >= len(self.b):
-            return k
+        # if self.l and k >= self.l[-1]:
+        #     print(k, k + len(self.l))
+        #     return k + len(self.l)
         
-        if self.b[right] - right <= k:
+        # if right >= len(self.l):
+        #     return k + len(self.l)
+
+        if self.l[right] - right <= k:
+            # print('right', right + k + 1)
             return right + k + 1
-        if self.b[left] - left <= k:
+        elif self.l[left] - left <= k:
+            # print('left', left + k + 1)
             return left + k + 1
         else:
+            # print('less', k, left, right)
             return k
 
-
+        
 
 
 # Your Solution object will be instantiated and called as such:
 # obj = Solution(n, blacklist)
 # param_1 = obj.pick()
+
+# 2, 3, 5, 从7+3 (n - len(blacklist))里面挑选, 因为只有这么多个答案可以挑选
+# k < 2, 就直接return k
+
+# 2和3之间没有数值可以取
+
+# 如果是 k = 2, 那我们应该顺位到4, 所以是k + 2, 这个2是要skip的black list的位置
+# 所以我们是找, nums[mid] <= k + mid的最大值
+
+# 超过了list的size 就是k + 总长度
