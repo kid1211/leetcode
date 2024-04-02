@@ -10,7 +10,6 @@ class Solution:
                     val = dp[i - 1][j]
                     if j - i >= 0:
                         val -= dp[i - 1][j - i]
-                    val %= M
                     dp[i][j] = dp[i][j - 1] + val
                     dp[i][j] %= M
         
