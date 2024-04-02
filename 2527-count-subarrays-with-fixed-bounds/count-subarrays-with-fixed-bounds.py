@@ -4,13 +4,12 @@ class Solution:
         res = 0
 
         for i in range(len(nums)):
-            val = nums[i]
-
-            if val < minK or val > maxK:
+            if nums[i] < minK or nums[i] > maxK:
                 left = i
-            if val == minK:
+            if nums[i] == minK:
                 minPos = i
-            if val == maxK:
+            if nums[i] == maxK:
                 maxPos = i
+            # print(minPos, maxPos, min(minPos, maxPos) - left)
             res += max(0, min(minPos, maxPos) - left)
         return res
