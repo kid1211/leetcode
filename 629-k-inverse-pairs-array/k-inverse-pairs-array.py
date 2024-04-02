@@ -7,9 +7,9 @@ class Solution:
                 if j == 0:
                     dp[i][j] = 1
                 else:
-                    val = dp[i - 1][j]
+                    val = dp[i - 1][j] % M
                     if j - i >= 0:
-                        val -= dp[i - 1][j - i]
+                        val -= dp[i - 1][j - i] % M
                     dp[i][j] = dp[i][j - 1] + val
                     dp[i][j] %= M
         
