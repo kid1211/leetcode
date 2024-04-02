@@ -16,5 +16,5 @@ class Solution:
         res = dp[n][k] + M
         if k > 0:
             res -= dp[n][k - 1]
-        res %= M
-        return res
+
+        return res % M
