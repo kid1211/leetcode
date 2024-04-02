@@ -1,21 +1,12 @@
 class Solution:
     def isIsomorphic(self, s: str, t: str) -> bool:
-        unique1 = defaultdict(set)
-        for i in range(len(s)):
-            unique1[s[i]].add(i)
-        unique2 = defaultdict(set)
-        for i in range(len(s)):
-            unique2[t[i]].add(i)
+        map_s = {}
+        map_t = {}
 
-        unique1 = sorted(unique1.values())
-        unique2 = sorted(unique2.values())
-        return unique1 == unique2
-        # unique1 = defaultdict(list)
-        # unique2 = defaultdict(list)
-
-        # for i in range(len(s)):
-        #     unique1[s[i]] += [i]
-        # for i in range(len(t)):
-        #     unique2[t[i]] += [i]
-        # print(unique1.values(), unique2.values())
-        # return unique1.values() == unique2.values()
+        for i in range(len(s)):
+            if (not s[i] in map_s) and (not t[i] in map_t):
+                map_s[s[i]] = t[i]
+                map_t[t[i]] = s[i]
+            elif map_s.get(s[i]) != t[i] or map_t.get(t[i]) != s[i]:
+                return False
+        return True
