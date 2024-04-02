@@ -13,7 +13,7 @@ class Solution:
                     dp[i][j] = dp[i][j - 1] + val
                     dp[i][j] %= M
         
-        res = dp[n][k] + M
+        res = dp[n][k]
         if k > 0:
             res -= dp[n][k - 1]
 
