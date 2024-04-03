@@ -1,15 +1,14 @@
 class Solution:
     def checkSubarraySum(self, nums: List[int], k: int) -> bool:
-        rolling = 0
         remain = {}
         remain[0] = -1
+        rolling = 0
+
         for i in range(len(nums)):
             rolling += nums[i]
-            rolling %= k
-
-            if rolling in remain:
-                if i - remain[rolling] > 1:
+            if rolling % k in remain:
+                if i - remain[rolling % k] > 1:
                     return True
             else:
-                remain[rolling] = i
+                remain[rolling % k] = i
         return False
