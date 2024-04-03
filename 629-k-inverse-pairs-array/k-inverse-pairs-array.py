@@ -10,13 +10,15 @@ class Solution:
                 return 1
 
             return (
-                dfs(n, k - 1) + dfs(n - 1, k) - dfs(n - 1, k - n)
+                dfs(n, k - 1) + # rolling
+                dfs(n - 1, k) - 
+                dfs(n - 1, k - n)
             ) % M
         
-        res = dfs(n, k)
-        if k > 0:
-            res -= dfs(n, k - 1)
-        return res % M
+        # res = 
+        # if k > 0:
+        #     res -= 
+        return (dfs(n, k) - dfs(n, k - 1)) % M
         
 
         # dp = [[0 for _ in range(k + 1)] for _ in range(n + 1)]
