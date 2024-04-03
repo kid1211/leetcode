@@ -4,7 +4,7 @@ class Solution:
         busPath = { i:set(routes[i]) for i in range(n) }
         busPath[-1] = set([source])
         edges = defaultdict(set)
-        # -1
+
         for i in range(n):
             if source in busPath[i]:
                 edges[-1].add(i)
@@ -13,10 +13,9 @@ class Solution:
                     edges[i].add(j)
                     edges[j].add(i)
         
-        
+        res = -1
         queue = deque([-1])
         visited = set([-1])
-        res = -1
 
         while queue:
             res += 1
