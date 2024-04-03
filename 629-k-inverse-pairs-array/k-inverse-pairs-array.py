@@ -18,7 +18,9 @@ class Solution:
         # res = 
         # if k > 0:
         #     res -= 
-        return (dfs(n, k) - dfs(n, k - 1)) % M
+        return (
+            dfs(n, k) - dfs(n, k - 1)
+        ) % M
         
 
         # dp = [[0 for _ in range(k + 1)] for _ in range(n + 1)]
