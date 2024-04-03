@@ -4,15 +4,13 @@ class Solution:
 
         @cache
         def dfs(n, k):
-            if n == 0:
+            if n == 0 or k < 0:
                 return 0
             if k == 0:
                 return 1
             
             val = dfs(n - 1, k)
-            if k >= n:
-                val -= dfs(n - 1, k - n) 
-            val += dfs(n, k - 1)
+            val += dfs(n, k - 1) - dfs(n - 1, k - n) 
             return val % M
         
         res = dfs(n, k)
