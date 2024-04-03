@@ -1,5 +1,6 @@
 class Solution:
     def countSubarrays(self, nums: List[int], minK: int, maxK: int) -> int:
+        
         left = minPos = maxPos = -1
         res = 0
 
@@ -11,5 +12,6 @@ class Solution:
                 minPos = i
             if nums[i] == maxK:
                 maxPos = i
-            res += max(0, min(minPos, maxPos) - left)
+            
+            res += max(min(minPos, maxPos) - left, 0)
         return res
