@@ -9,14 +9,14 @@ class Solution:
             for i in range(startIdx, len(candidates)):
                 num = candidates[i]
                 if remain - num < 0:
-                    continue
+                    break
                 if remain - num == 0:
                     res += [[num]]
-                    continue
+                    break
                 for tmp in dfs(i, remain - num):
                     res += [
                         [num] + tmp
                     ]
             return res
-        
+        candidates.sort()
         return dfs(0, target)
