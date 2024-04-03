@@ -16,7 +16,7 @@ class Solution:
             )
         
         return (
-            dfs(n, k) - dfs(n, k - 1)
+            dfs(n, k) % M - dfs(n, k - 1) % M
         ) % M
         
 
