@@ -10,14 +10,11 @@ class Solution:
                 return 1
 
             return (
-                dfs(n, k - 1) + # rolling
-                dfs(n - 1, k) - 
-                dfs(n - 1, k - n)
-            ) % M
+                dfs(n, k - 1) % M + # rolling
+                dfs(n - 1, k) % M - 
+                dfs(n - 1, k - n) % M
+            )
         
-        # res = 
-        # if k > 0:
-        #     res -= 
         return (
             dfs(n, k) - dfs(n, k - 1)
         ) % M
