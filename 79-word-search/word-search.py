@@ -6,7 +6,6 @@ class Solution:
         rows, cols = len(board), len(board[0])
         visited = set()
         def dfs(x, y, idx):
-            nonlocal visited
             if idx == n - 1:
                 return True
             
