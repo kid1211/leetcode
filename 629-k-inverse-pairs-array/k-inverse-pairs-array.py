@@ -8,10 +8,10 @@ class Solution:
                 return 0
             if k == 0:
                 return 1
-            
-            val = dfs(n - 1, k)
-            val += dfs(n, k - 1) - dfs(n - 1, k - n) 
-            return val % M
+
+            return (
+                dfs(n, k - 1) + dfs(n - 1, k) - dfs(n - 1, k - n)
+            ) % M
         
         res = dfs(n, k)
         if k > 0:
