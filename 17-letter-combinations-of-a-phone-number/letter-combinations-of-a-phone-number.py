@@ -10,12 +10,12 @@ maps = {
 }
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
-        
+        if not digits:
+            return []
         def dfs(i):
             if i == len(digits) - 1:
                 return list(maps[digits[i]])
-            if i >= len(digits):
-                return []
+
             res = []
             for l in maps[digits[i]]:
                 for tmp in dfs(i + 1):
