@@ -9,15 +9,15 @@ class Solution:
             if k == 0:
                 return 1
             
-            val = dfs(n - 1, k) % M
+            val = dfs(n - 1, k)
             if k >= n:
-                val -= dfs(n - 1, k - n) % M
-            val += dfs(n, k - 1) % M
+                val -= dfs(n - 1, k - n) 
+            val += dfs(n, k - 1)
             return val % M
         
-        res = dfs(n, k) % M
+        res = dfs(n, k)
         if k > 0:
-            res -= dfs(n, k - 1) % M
+            res -= dfs(n, k - 1)
         return res % M
         
 
