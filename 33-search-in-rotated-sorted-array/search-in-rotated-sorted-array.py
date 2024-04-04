@@ -12,10 +12,8 @@ class Solution:
             # left, target mid, right
             if nums[left] <= target < nums[mid]:
                 right = mid
-                continue
             elif nums[mid] < target <= nums[right]:
                 left = mid
-                continue
             elif nums[left] >= nums[mid]:
                 right = mid
             else:
