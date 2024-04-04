@@ -4,23 +4,19 @@ class Solution:
 
         while left + 1 < right:
             mid = (left + right) // 2
-            # print(left, right, mid)
 
             if target == nums[mid]:
                 return mid
-            
-            # left, target mid, right
+
             if nums[left] <= target < nums[mid]:
                 right = mid
             elif nums[mid] < target <= nums[right]:
                 left = mid
+            # target not in the sorted portion
             elif nums[left] >= nums[mid]:
                 right = mid
             else:
                 left = mid
-                # left target mid right
-                # left mid target right
-                # break
 
         if nums[right] == target:
             return right
