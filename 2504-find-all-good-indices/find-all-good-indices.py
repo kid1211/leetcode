@@ -22,7 +22,7 @@ class Solution:
                 length[i] = (left, 1)
             last = length[i]
         
-        print(length)
+        # print(length)
         res = []
         for i in range(1, n - 1):
             prevLeft, prevRight = length[i - 1]
