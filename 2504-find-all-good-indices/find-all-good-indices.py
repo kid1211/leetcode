@@ -30,13 +30,4 @@ class Solution:
             # print(i, left, right)
             if prevLeft >= k and nextRight >= k:
                 res += [i]
-        
-        # last = nums[0]
-        # test = ["0"]
-        # for num in nums[1:]:
-        #     test += "+" if num >= last else "-"
-        #     last = num
-        # print(test)
         return res
-# ['0', '-', '-', '-', '-', '+', '+', '+', '+', '+']
-# [(1, 1), (2, 1), (3, 1), (4, 1), (5, 6), (1, 5), (1, 4), (1, 3), (1, 2), (1, 1)]
