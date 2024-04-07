@@ -12,15 +12,13 @@ class Solution:
                 right = mid
             elif nums[mid] < target <= nums[right]:
                 left = mid
-            # target not in the sorted portion
-            elif nums[left] >= nums[mid]:
-                right = mid
-            else:
+            elif nums[left] < nums[mid]:
                 left = mid
-
-        if nums[right] == target:
-            return right
+            else:
+                right = mid
+        
         if nums[left] == target:
             return left
+        if nums[right] == target:
+            return right
         return -1
-        
