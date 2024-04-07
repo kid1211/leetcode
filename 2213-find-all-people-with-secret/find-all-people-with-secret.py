@@ -1,27 +1,25 @@
 class Solution:
     def findAllPeople(self, n: int, meetings: List[List[int]], firstPerson: int) -> List[int]:
-        same_time = defaultdict(list)
-        for p1, p2, time in meetings:
-            same_time[time] += [(p1, p2)]
-        # 0 and first person knows it
+        sameTime = defaultdict(list)
+
+        for p1, p2, t in meetings:
+            sameTime[t] += [(p1, p2)]
+        
         uf = UnionFind(n)
         uf.union(0, firstPerson)
+        for t in sorted(sameTime.keys()):
+            sameTimeMeeting = sameTime[t]
 
-        for time in sorted(same_time.keys()):
-            for p1, p2 in same_time[time]:
+            for p1, p2 in sameTimeMeeting:
                 uf.union(p1, p2)
             
-            for p1, p2 in same_time[time]:
-                if uf.find(p1) == uf.find(0) or uf.find(p1) == uf.find(0):
+            for p1, p2 in sameTimeMeeting:
+                if uf.find(p1) == uf.find(0) or uf.find(p2) == uf.find(0):
                     continue
                 uf.reset(p1)
                 uf.reset(p2)
-            
-        res = []
-        for i in range(n):
-            if uf.find(i) == uf.find(0):
-                res += [i]
-        return res
+        
+        return [i for i in range(n) if uf.find(i) == uf.find(0)]
 
 class UnionFind:
     def __init__(self, n):
@@ -37,10 +35,7 @@ class UnionFind:
     def union(self, a, b):
         fa, fb = self.find(a), self.find(b)
 
-        if fa == fb:
-            return False
-        else:
-            self.father[fb] = fa
-            return True
-    def reset(self, a):
-        self.father[a] = a
+        if fa != fb:
+            self.father[fa] = fb
+    def reset(self, node):
+        self.father[node] = node
