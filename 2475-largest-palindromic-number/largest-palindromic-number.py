@@ -8,8 +8,8 @@ class Solution:
 
         half = ""
         for i in range(9, -1, -1):
-            if counter[i] == 0:
-                continue
+            # if counter[i] == 0:
+            #     continue
             if counter[i] % 2 == 1 and not largest_Odd:
                 largest_Odd = i
 
