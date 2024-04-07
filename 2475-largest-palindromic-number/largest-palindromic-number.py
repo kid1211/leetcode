@@ -17,9 +17,7 @@ class Solution:
                 continue
             half += str(i) * (counter[i] // 2)
         
-        if largest_Odd is not None:
-            return half + str(largest_Odd) + half[::-1]
-        elif half:
-            return half + half[::-1]
+        if half or largest_Odd is not None:
+            return half + str(largest_Odd if largest_Odd is not None else "") + half[::-1]
         else:
             return "" if counter[0] == 0 else "0"
