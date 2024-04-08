@@ -12,19 +12,15 @@ class MyHashMap:
 
     def put(self, key: int, value: int) -> None:
         prevNode = self.getPrevNode(key)
-        # if not prevNode:
-        #     hashKey = key % 31
-        #     self.array[hashKey] = HashNode(key, value)
-        # el
+
         if prevNode.next and prevNode.next.key == key:
             prevNode.next.val = value
-            # exist
         else:
             prevNode.next = HashNode(key, value)
 
     def get(self, key: int) -> int:
-        node = self.getPrevNode(key)
-        return node.next.val if node and node.next else -1
+        prevNode = self.getPrevNode(key)
+        return prevNode.next.val if prevNode.next else -1
 
     def remove(self, key: int) -> None:
         prevNode = self.getPrevNode(key)
