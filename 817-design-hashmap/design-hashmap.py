@@ -6,7 +6,7 @@ class HashNode:
 class MyHashMap:
 
     def __init__(self):
-        self.array = [HashNode()] * 139
+        self.array = [HashNode()] * 31
 
     def put(self, key: int, value: int) -> None:
         prevNode = self.getPrevNode(key)
