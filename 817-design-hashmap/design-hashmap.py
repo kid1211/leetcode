@@ -6,7 +6,8 @@ class HashNode:
 class MyHashMap:
 
     def __init__(self):
-        self.array = [HashNode()] * 31
+        self.length = 139
+        self.array = [HashNode()] * self.length
 
     def put(self, key: int, value: int) -> None:
         prevNode = self.getPrevNode(key)
@@ -27,7 +28,7 @@ class MyHashMap:
             prevNode.next = prevNode.next.next
     
     def getPrevNode(self, key):
-        hashKey = key % 31
+        hashKey = key % self.length
         node = self.array[hashKey]
         last = None
         while node and node.key != key:
