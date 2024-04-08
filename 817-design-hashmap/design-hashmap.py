@@ -27,8 +27,6 @@ class MyHashMap:
 
         if prevNode and prevNode.next and prevNode.next.key == key:
             prevNode.next = prevNode.next.next
-        else:
-            print(prevNode)
     
     def getPrevNode(self, key):
         hashKey = key % 31
