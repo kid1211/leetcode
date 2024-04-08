@@ -12,9 +12,9 @@ class Solution:
                 return 1
             
             return (
-                dfs(n, k - 1) +
-                dfs(n - 1, k) -
-                dfs(n - 1, k - n)
+                dfs(n, k - 1) % M +
+                dfs(n - 1, k) % M -
+                dfs(n - 1, k - n) % M
             ) % M
 
         return (dfs(n, k) - dfs(n, k - 1)) % M
