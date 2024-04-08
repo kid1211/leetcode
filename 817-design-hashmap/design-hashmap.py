@@ -4,10 +4,9 @@ class HashNode:
         self.val = val
         self.next = None
 class MyHashMap:
-
     def __init__(self):
         self.length = 687
-        self.array = [HashNode()] * self.length
+        self.array = [HashNode() for _ in range(self.length)]
 
     def put(self, key: int, value: int) -> None:
         prevNode = self.getPrevNode(key)
