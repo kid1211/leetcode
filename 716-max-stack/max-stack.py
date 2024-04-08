@@ -1,32 +1,34 @@
 from sortedcontainers import SortedList
-
 class MaxStack:
 
     def __init__(self):
-        self.stack = SortedList()
-        self.value = SortedList()
-        self.cnt = 0
+        self.idx = 0
+        self.normal = SortedList()
+        self.maxValues = SortedList()
 
     def push(self, x: int) -> None:
-        self.stack += [(self.cnt, x)]
-        self.value += [(x, self.cnt)]
-        self.cnt += 1
+        idx = self.idx
+        self.normal += [(idx, x)]
+        self.maxValues += [(x, idx)]
+        self.idx += 1
 
     def pop(self) -> int:
-        stackItem = self.stack.pop()
-        self.value.remove(stackItem[::-1])
-        return stackItem[1]
+        idx, val = self.normal.pop()
+        self.maxValues.remove((val, idx))
+        return val
 
     def top(self) -> int:
-        return self.stack[-1][1]
+        return self.normal[-1][1] if self.normal else -1
 
     def peekMax(self) -> int:
-        return self.value[-1][0]
+        return self.maxValues[-1][0] if self.normal else -1
         
+
     def popMax(self) -> int:
-        valueItem = self.value.pop()
-        self.stack.remove(valueItem[::-1])
-        return valueItem[0]
+        val, idx = self.maxValues.pop()
+        self.normal.remove((idx, val))
+        return val
+        
 
 
 # Your MaxStack object will be instantiated and called as such:
