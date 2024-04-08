@@ -6,7 +6,7 @@ class HashNode:
 class MyHashMap:
 
     def __init__(self):
-        self.length = 139
+        self.length = 687
         self.array = [HashNode()] * self.length
 
     def put(self, key: int, value: int) -> None:
