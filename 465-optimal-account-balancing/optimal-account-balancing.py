@@ -18,9 +18,8 @@ class Solution:
             res = sys.maxsize
             for nxt in range(curr + 1, len(unsettled)):
                 if unsettled[curr] * unsettled[nxt] < 0:
-                    delta_ratio = 1 # -1 if unsettled[nxt] > 0 else 1
-                    unsettled[nxt] += delta_ratio * unsettled[curr]
+                    unsettled[nxt] += unsettled[curr]
                     res = min(res, 1 + dfs(curr + 1))
-                    unsettled[nxt] -= delta_ratio * unsettled[curr]
+                    unsettled[nxt] -= unsettled[curr]
             return res
         return dfs(0)
