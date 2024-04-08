@@ -3,8 +3,8 @@ class Solution:
         balance = collections.defaultdict(int)
 
         for a, b, amount in transactions:
-            balance[a] -= amount # wtf
-            balance[b] += amount
+            balance[a] += amount # wtf
+            balance[b] -= amount
         
         unsettled = [val for val in balance.values() if val != 0]
 
