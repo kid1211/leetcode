@@ -6,9 +6,7 @@ class HashNode:
 class MyHashMap:
 
     def __init__(self):
-        size = 31
-        self.array = [HashNode()] * 31
-        
+        self.array = [HashNode()] * 139
 
     def put(self, key: int, value: int) -> None:
         prevNode = self.getPrevNode(key)
@@ -25,7 +23,7 @@ class MyHashMap:
     def remove(self, key: int) -> None:
         prevNode = self.getPrevNode(key)
 
-        if prevNode and prevNode.next and prevNode.next.key == key:
+        if prevNode.next and prevNode.next.key == key:
             prevNode.next = prevNode.next.next
     
     def getPrevNode(self, key):
