@@ -3,23 +3,23 @@ class Solution:
         balance = collections.defaultdict(int)
 
         for a, b, amount in transactions:
-            balance[a] += amount # wtf
-            balance[b] -= amount
-        
-        unsettled = [val for val in balance.values() if val != 0]
+            balance[a] -= amount
+            balance[b] += amount
 
+        vals = [val for val in balance.values() if val != 0]
+        
+        # @cache
         def dfs(curr):
-            while curr < len(unsettled) and unsettled[curr] == 0:
+            while curr < len(vals) and vals[curr] == 0:
                 curr += 1
-            
-            if curr == len(unsettled):
+            if curr == len(vals):
                 return 0
-            
+
             res = sys.maxsize
-            for nxt in range(curr + 1, len(unsettled)):
-                if unsettled[curr] * unsettled[nxt] < 0:
-                    unsettled[nxt] += unsettled[curr]
+            for nxt in range(curr + 1, len(vals)):
+                if vals[nxt] * vals[curr] < 0:
+                    vals[nxt] += vals[curr]
                     res = min(res, 1 + dfs(curr + 1))
-                    unsettled[nxt] -= unsettled[curr]
+                    vals[nxt] -= vals[curr]
             return res
         return dfs(0)
