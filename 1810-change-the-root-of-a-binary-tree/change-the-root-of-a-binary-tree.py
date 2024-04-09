@@ -23,31 +23,21 @@ class Solution:
             print(res)
             node = node.left
 
-        while current:
-            print('before')
-            printing(current)
-
+        while current and current != root:
             ori_parent = current.parent
             current.parent = prev
-            
-            print('after')
-            printing(current)
-            if current == root:
-                break
     
             if current.left != prev:
                 current.right = current.left
             current.left = ori_parent
-    
 
-            prev = current
-            current = current.left
+            prev, current = current, current.left
         
+        current.parent = prev
         if current.parent == current.left:
             current.left = None
         elif current.parent == current.right:
             current.right = None
-
         return leaf
 # 7: left->2
 # 2: parent->7left->5right->4
