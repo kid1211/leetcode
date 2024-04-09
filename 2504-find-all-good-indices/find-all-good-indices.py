@@ -1,33 +1,18 @@
 class Solution:
     def goodIndices(self, nums: List[int], k: int) -> List[int]:
         n = len(nums)
-        length = [(1, 1)] * n
-        last = (1, 1)
-        for i in range(1, len(nums)):
-            left, right = length[i]
-            prevLeft, prevRight = last
-            if nums[i] <= nums[i - 1]:
-                length[i] = (prevLeft + 1, right)
-            else:
-                length[i] = (1, right)
-            last = length[i]
+        good = [(1, 1) for _ in range(n)]
 
-        last = (1, 1)
-        for i in range(len(nums) - 2, -1, -1):
-            left, right = length[i]
-            prevLeft, prevRight = last
+        for i in range(1, n):
+            if nums[i] <= nums[i - 1]:
+                good[i] = (good[i - 1][0] + 1, good[i][1])
+        for i in range(n - 2, -1, -1):
             if nums[i] <= nums[i + 1]:
-                length[i] = (left, prevRight + 1)
-            else:
-                length[i] = (left, 1)
-            last = length[i]
+                good[i] = (good[i][0], good[i + 1][1] + 1)
         
-        # print(length)
         res = []
-        for i in range(1, n - 1):
-            prevLeft, prevRight = length[i - 1]
-            nextLeft, nextRight = length[i + 1]
-            # print(i, left, right)
-            if prevLeft >= k and nextRight >= k:
+        for i in range(1, len(nums) - 1):
+            if good[i - 1][0] >= k and good[i + 1][1] >= k:
                 res += [i]
         return res
+        
