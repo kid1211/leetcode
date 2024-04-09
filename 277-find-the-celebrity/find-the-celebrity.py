@@ -5,22 +5,21 @@
 class Solution:
     def findCelebrity(self, n: int) -> int:
         
+        @cache
+        def cachedKnow(a, b):
+            return knows(a, b)
+
         def isCelebrity(idx):
             for i in range(n):
                 if i == idx:
                     continue
-                if cachedKnow(i, idx) and not cachedKnow(idx, i):
-                    continue
-                return False
+                if cachedKnow(idx, i) or not cachedKnow(i, idx):
+                    return False
             return True
         
-        @cache
-        def cachedKnow(a, b):
-            return knows(a, b)
-        
-        canadiate = 0
+        potential = 0
         for i in range(1, n):
-            if cachedKnow(canadiate, i):
-                canadiate = i
+            if cachedKnow(potential, i):
+                potential = i
         
-        return canadiate if isCelebrity(canadiate) else -1
+        return potential if isCelebrity(potential) else -1
