@@ -11,15 +11,15 @@ class Solution:
             
             longest = secondLongest = 0
             for child in edges[curr]:
-                longestChain = dfs(child)
+                chain = dfs(child)
 
                 if s[curr] == s[child]:
                     continue
                 
-                if longestChain > longest:
-                    longest, secondLongest = longestChain, longest
-                elif longestChain > secondLongest:
-                    secondLongest = longestChain
+                if chain > longest:
+                    longest, secondLongest = chain, longest
+                elif chain > secondLongest:
+                    secondLongest = chain
                 
             res = max(res, longest + secondLongest + 1)
             return longest + 1
