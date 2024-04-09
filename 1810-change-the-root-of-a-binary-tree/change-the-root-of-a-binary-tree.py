@@ -34,9 +34,9 @@ class Solution:
             prev, current = current, current.left
         
         current.parent = prev
-        if current.parent == current.left:
+        if prev == current.left:
             current.left = None
-        elif current.parent == current.right:
+        elif prev == current.right:
             current.right = None
         return leaf
 # 7: left->2
