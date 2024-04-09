@@ -1,13 +1,15 @@
 class Solution:
     def verifyPreorder(self, preorder: List[int]) -> bool:
-        min_limit = -inf
-        stack = []
-
-        for num in preorder:
-            while stack and stack[-1] < num:
-                min_limit = stack.pop()
+        def helper(i, min_limit, max_limit):
+            if i == len(preorder):
+                return i, True
             
-            if num <= min_limit:
-                return False
-            stack += [num]
-        return True
+            root = preorder[i]
+            if not min_limit < root < max_limit:
+                return i, False
+
+            leftIdx, left = helper(i + 1, min_limit, root)
+            rightIdx, right = helper(leftIdx, root, max_limit)
+            return rightIdx, left or right
+            
+        return helper(0, -inf, inf)[1]
