@@ -13,7 +13,7 @@ class Solution:
                 return
             
             dfs(node.left, True)
-            if node and isLeft and not node.right and not node.left:
+            if isLeft and not node.right and not node.left:
                 res += node.val
             dfs(node.right, False)
         
