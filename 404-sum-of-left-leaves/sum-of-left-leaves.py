@@ -13,10 +13,8 @@ class Solution:
                 return
             
             dfs(node.left, True)
-            if node and isLeft:
-                print(node.val, node.left, node.right)
-                # not node.left and
-                res += node.val if not node.right and not node.left else 0
+            if node and isLeft and not node.right and not node.left:
+                res += node.val
             dfs(node.right, False)
         
         dfs(root, False)
