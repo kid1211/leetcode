@@ -10,36 +10,40 @@ class Node:
 
 class Solution:
     def flipBinaryTree(self, root: 'Node', leaf: 'Node') -> 'Node':
-        prev = None
-        current = leaf
-        def printing(node):
-            res = str(node.val) + ": "
-            if node.parent:
-                res += f"parent->{node.parent.val}"
-            if node.left:
-                res += f"left->{node.left.val}"
-            if node.right:
-                res += f"right->{node.right.val}"
-            print(res)
-            node = node.left
-
-        while current and current != root:
-            ori_parent = current.parent
-            current.parent = prev
-    
-            if current.left != prev:
-                current.right = current.left
-            current.left = ori_parent
-
-            prev, current = current, current.left
         
-        current.parent = prev
-        if prev == current.left:
-            current.left = None
-        elif prev == current.right:
-            current.right = None
+        def dfs(node, newParent):
+            # print('before', node.val , newParent.val if newParent else -1)
+            # TODO: no node?
+            oriParent = node.parent
+            node.parent = newParent
+
+            if node == root:
+                print(
+                node.val, 
+                node.left.val if node.left else -1, 
+                node.right.val if node.right else -1, 
+                node.parent.val if node.parent else -1)
+                if node.left == node.parent:
+                    node.left = None
+                elif node.right == node.parent:
+                    node.right = None
+                return
+
+            if node.left and node.left != newParent:
+                node.right = node.left
+            node.left = oriParent
+            # print(
+            #     node.val, 
+            #     node.left.val if node.left else -1, 
+            #     node.right.val if node.right else -1, 
+            #     node.parent.val if node.parent else -1)
+            # if node == root:
+            #     return
+            dfs(oriParent, node)
+
+        dfs(leaf, None)
+
+        
         return leaf
-# 7: left->2
-# 2: parent->7left->5right->4
-# 5: parent->2left->3right->6
-# 3: parent->5right->1
+# 3 5 1 5
+# 3 5 1 1
