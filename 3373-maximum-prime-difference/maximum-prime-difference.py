@@ -1,6 +1,7 @@
 from math import sqrt
 class Solution:
     def maximumPrimeDifference(self, nums: List[int]) -> int:
+        @cache
         def Prime(n):
             if n <= 1:
                 return False
