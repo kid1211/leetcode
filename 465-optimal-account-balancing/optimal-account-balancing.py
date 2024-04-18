@@ -3,8 +3,8 @@ class Solution:
         bal = defaultdict(int)
 
         for a, b, amount in transactions:
-            bal[a] += amount
-            bal[b] -= amount
+            bal[a] -= amount
+            bal[b] += amount
         
         val = [item for item in bal.values() if item != 0]
         
