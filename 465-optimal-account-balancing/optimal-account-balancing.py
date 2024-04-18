@@ -6,22 +6,20 @@ class Solution:
             bal[a] += amount
             bal[b] -= amount
         
-        val = [item for item in bal.values() if item != 0]
-        
+        unsettled = [item for item in bal.values() if item != 0]
+
         def dfs(curr):
-            while curr < len(val) and val[curr] == 0:
+            while curr < len(unsettled) and unsettled[curr] == 0:
                 curr += 1
-    
-            if curr == len(val):
-                return 0
             
+            if curr == len(unsettled):
+                return 0
+
             res = sys.maxsize
-            for nxt in range(curr + 1, len(val)):
-                if val[nxt] * val[curr] < 0:
-                    val[nxt] += val[curr]
-                    # val[curr] -= val[nxt]
+            for nxt in range(curr + 1, len(unsettled)):
+                if unsettled[nxt] * unsettled[curr] < 0:
+                    unsettled[nxt] += unsettled[curr]
                     res = min(res, 1 + dfs(curr + 1))
-                    val[nxt] -= val[curr]
-                    # val[curr] += val[nxt]
+                    unsettled[nxt] -= unsettled[curr]
             return res
         return dfs(0)
