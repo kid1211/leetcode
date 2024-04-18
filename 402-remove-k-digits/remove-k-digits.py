@@ -3,9 +3,10 @@ class Solution:
         stack = []
 
         for d in num:
-            while k and stack and d < stack[-1]:
+            while stack and k and stack[-1] > d:
                 stack.pop()
                 k -= 1
-            stack.append(d)
+            stack += [d]
         res = stack[:-k] if k else stack
-        return "".join(res).lstrip('0') or '0'
+        return "".join(res).lstrip("0") or "0"
+
