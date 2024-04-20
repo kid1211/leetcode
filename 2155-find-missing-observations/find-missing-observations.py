@@ -5,15 +5,15 @@ class Solution:
 
         if not (1 <= remain/n <= 6):
             return []
-        print(remain, n)
-        # [6, 6, 6, 1, 1]
-        # 12 + 15
-        res = []
 
+        res = []
         while remain:
             # n - len(res) == remain slot if filled all 1
-            val = min(6, remain - (n - len(res) - 1))
+            remainSlotFilledWithOne = n - 1
+            val = min(6, remain - remainSlotFilledWithOne)
+
             remain -= val
+            n -= 1
             res += [val]
         
         return res
