@@ -5,10 +5,9 @@ class Solution:
 
         if not (1 <= remain/n <= 6):
             return []
-
+        
         res = []
         while remain:
-            # n - len(res) == remain slot if filled all 1
             remainSlotFilledWithOne = n - 1
             val = min(6, remain - remainSlotFilledWithOne)
 
@@ -17,9 +16,3 @@ class Solution:
             res += [val]
         
         return res
-# 3
-# 3 - 2
-
-# 12/2 
-# 6, 6
-# 9 - 6 = 3, < 2 - 1 - 1
