@@ -10,7 +10,7 @@ class Solution:
         # 12 + 15
         res = []
 
-        while n - len(res):
+        while remain:
             # n - len(res) == remain slot if filled all 1
             val = min(6, remain - (n - len(res) - 1))
             remain -= val
