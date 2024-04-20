@@ -8,5 +8,4 @@ class Solution:
                 k -= 1
             stack += [d]
         res = stack[:-k] if k else stack
-        return "".join(res).lstrip("0") or "0"
-
+        return "".join(res).lstrip('0') or '0'
