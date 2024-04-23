@@ -10,7 +10,6 @@ class Solution:
             neighbors[b].add(a)
 
         queue = deque([i for i in range(n) if len(neighbors[i]) == 1])
-        print(queue)
 
         while n > 2:
             n -= len(queue)
@@ -22,5 +21,4 @@ class Solution:
 
                     if len(neighbors[neighbor]) == 1:
                         queue.append(neighbor)
-
         return queue
