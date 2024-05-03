@@ -2,19 +2,17 @@ class Solution:
     def compareVersion(self, version1: str, version2: str) -> int:
 
         def getNext(text, start):
-            # if text[start] == ".":
-            #     start += 1
             end = 0
             for end in range(start, len(text)):
                 if text[end] == ".":
                     break
             end += 1 if end == len(text) - 1 else 0
-            return text[start:end]
+            return text[start:end], end + 1
     
         leftIdx = rightIdx = 0
         while True:
-            left = getNext(version1, leftIdx)
-            right = getNext(version2, rightIdx)
+            left, leftIdx = getNext(version1, leftIdx)
+            right, rightIdx = getNext(version2, rightIdx)
 
             # print(leftIdx, rightIdx, left, right)
             if left and right:
@@ -27,21 +25,17 @@ class Solution:
                     return 1
             else:
                 break
-                
-            leftIdx += len(left) + 1
-            rightIdx += len(right) + 1
-        
-        while left and leftIdx < len(version1):
-            left = getNext(version1, leftIdx)
-            if left and int(left) != 0:
+
+        print('end', leftIdx, rightIdx)
+        while left:
+            if int(left) != 0:
                 return 1
-            leftIdx += len(left) + 1
+            left, leftIdx = getNext(version1, leftIdx)
     
-        while right and rightIdx < len(version2):
-            right = getNext(version2, rightIdx)
-            if right and int(right) != 0:
+        while right:
+            if int(right) != 0:
                 return -1
-            rightIdx += len(right) + 1
-            
+            right, rightIdx = getNext(version2, rightIdx)
+
         return 0
             
