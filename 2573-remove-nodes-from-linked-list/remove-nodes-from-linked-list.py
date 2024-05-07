@@ -21,14 +21,11 @@ class Solution:
             while curr:
                 maxi = max(maxi, curr.val)
 
-                if curr.val < maxi:
+                if last and curr.val < last.val:
                     last.next = curr.next
-                    nxt = curr.next
-                    # curr.next = None
-                    curr = nxt
                 else:
                     last = curr
-                    curr = curr.next
+                curr = curr.next
         newHead = reverse(head)
         skip(newHead)
         return reverse(newHead)
