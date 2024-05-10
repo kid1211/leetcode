@@ -1,18 +1,10 @@
+from heapq import heappop, heappush, heapify
 class Solution:
     def maximumHappinessSum(self, happiness: List[int], k: int) -> int:
-        # Convert the list into a max heap by inverting the happiness values 
-        # Python's default heap data structure is a min heap
-        max_heap = [-h for h in happiness]
-        heapq.heapify(max_heap)
-        
-        total_happiness_sum = 0
-        turns = 0
-
+        heap = [ -item for item in happiness]
+        heapify(heap)
+        res = 0
         for i in range(k):
-            # Invert again to get the original value
-            total_happiness_sum += max(-heapq.heappop(max_heap) - turns, 0)
-
-            # Increment turns for the next iteration
-            turns += 1
-            
-        return total_happiness_sum
+            val = heappop(heap)
+            res += max(-val - i, 0)
+        return res
