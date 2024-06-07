@@ -24,7 +24,6 @@ class Trie:
 
         for l in word:
             if node.word:
-                print(node.word, l)
                 return
             if l not in node.children:
                 node.children[l] = TrieNode()
