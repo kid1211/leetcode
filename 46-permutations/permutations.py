@@ -6,14 +6,19 @@ class Solution:
         def dfs(curr):
             nonlocal res
             if len(curr) == len(nums):
-                res += [curr]
+                res += [list(curr)]
                 return
             
             for i in range(len(nums)):
                 if i in visited:
                     continue
+
                 visited.add(i)
-                dfs(curr + [nums[i]])
+                curr += [nums[i]]
+
+                dfs(curr)
+                
+                curr.pop()
                 visited.remove(i)
         dfs([])
         return res
