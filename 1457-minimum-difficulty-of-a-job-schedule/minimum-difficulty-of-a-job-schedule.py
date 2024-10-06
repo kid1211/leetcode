@@ -9,9 +9,6 @@ class Solution:
         remain[-1] = jobDifficulty[-1]
         for i in range(n - 2, -1, -1):
             remain[i] = max(jobDifficulty[i], remain[i + 1])
-        
-        print(remain)
-
 
         @cache
         def dfs(curr, startIdx):
