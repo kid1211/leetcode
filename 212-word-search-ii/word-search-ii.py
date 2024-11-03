@@ -50,11 +50,8 @@ class Solution:
                 # Unmark the board spot
                 board[i][j] = char
 
-        # Run explore on every grid space
-        # Sort of like #200 Number of Islands
         for i in range(m):
             for j in range(n):
-                # As the trie gets smaller less exploration will be done
                 explore(i, j)
 
         return found
