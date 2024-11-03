@@ -1,27 +1,32 @@
 class Solution:
     def rotateString(self, s: str, goal: str) -> bool:
-        lowest = None
         if len(s) != len(goal):
             return False
-        freq = defaultdict(list)
+        s += s
+        expected = actual = 0
+        PRIME = 31
 
-        for i in range(len(s)):
-            freq[s[i]] += [i]
-
-            # if not lowest or len(freq[lowest]) > len(freq[s[i]]):
-            if not lowest or len(freq[lowest]) > len(freq[s[i]]):
-                lowest = s[i]
+        def get(l):
+            return ord(l) - ord('a')
         
-        for goal_i in range(len(goal)):
-            if goal[goal_i] != lowest:
-                continue
-            expect = goal[goal_i:] + goal[:goal_i]
-            for idx in freq[lowest]:
-                # print(expect, lowest, freq)
-                if expect == s[idx:] + s[:idx]:
-                    return True
-            return False
 
-        return False
+        def add(val, l):
+            val *= PRIME
+            val += get(l)
+            val %= sys.maxsize // PRIME
+            return val
 
+        
+        for i in range(len(goal)):
+            expected = add(expected, goal[i])
+            actual = add(actual, s[i])
+        
+        coef = PRIME ** (len(goal) - 1)
+        for i in range(len(goal), len(s)):
+            if expected == actual:
+                return True
             
+            actual -= coef * get(s[i - len(goal)])
+            actual = add(actual, s[i])
+            
+        return expected == actual
