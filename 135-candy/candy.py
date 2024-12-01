@@ -17,10 +17,11 @@ class Solution:
                 dec += 1
                 i += 1
                 
-            print(inc, dec, i, candies)
+            # print(inc, dec, i, candies)
             if inc or dec:
+                # don't know inc is longer or dec is longer, so just add up to inc or dec, then add either in or dec
                 candies += count_zero_based(inc) + max(inc, dec) + count_zero_based(dec)
-                print(count_zero_based(inc - 1), max(inc, dec), count_zero_based(dec - 1))
+                # print(count_zero_based(inc - 1), max(inc, dec), count_zero_based(dec - 1))
                 # candies += count()
             else:
                 i += 1
