@@ -1,3 +1,5 @@
+# Fix remove if last and if not head
+# directly access next, instead of poping it out in the while loop
 class Node:
     def __init__(self, letter, count):
         self.letter = letter
@@ -51,5 +53,4 @@ class Solution:
                 # might not be needed
                 last = None
         return res
-# drop case?
-# ccbbaaa
+
