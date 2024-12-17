@@ -19,8 +19,9 @@ class Solution:
                 head = curr
             last = curr
         
-        def addLast():
-            nonlocal last, res
+        res = ""
+        last = None
+        while head:
             if last:
                 lastL, lastC = last
                 res += lastL * min(lastC, repeatLimit)
@@ -30,10 +31,6 @@ class Solution:
                 else:
                     # might not be needed
                     last = None
-        res = ""
-        last = None
-        while head:
-            addLast()
                 
             if last:
                 res += head.letter
@@ -44,8 +41,15 @@ class Solution:
                 last = (head.letter, head.count)
                 head = head.next
         
-        
-        addLast()
+        if last:
+            lastL, lastC = last
+            res += lastL * min(lastC, repeatLimit)
+            
+            if lastC > repeatLimit:
+                last = (lastL, lastC - repeatLimit)
+            else:
+                # might not be needed
+                last = None
         return res
 # drop case?
 # ccbbaaa
