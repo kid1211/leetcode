@@ -1,54 +1,54 @@
 class Solution:
-    def leftmostBuildingQueries(self, heights, queries):
-       
-        result = [-1 for _ in range(len(queries))]
-        new_queries = [[] for _ in range(len(heights))]
+    def leftmostBuildingQueries(self, heights: List[int], queries: List[List[int]]) -> List[int]:
+        # if not queries
+
+        res = [ -1 for _ in range(len(queries))]
+        # rearrange the queries base on the idx of right element
+        # because we can only go right
+        newQueries = [ [] for _ in range(len(heights))]
+
         for i in range(len(queries)):
-            a = queries[i][0]
-            b = queries[i][1]
+            a, b = queries[i]
+
             if a > b:
                 a, b = b, a
+            
             if heights[b] > heights[a] or a == b:
-                result[i] = b
+                res[i] = b
             else:
-                new_queries[b].append((heights[a], i))
-        # new_queries = [[], [(6, 0)], [], [(6, 1)], [(8, 2), (5, 3)], []]
+                newQueries[b] += [(heights[a], i)]
 
-        def build_answer(i):
-            mono_stack_size = len(mono_stack)
-            for a, b in new_queries[i]:
-                position = findLeftMostElementThatIsGreatherThan(a) 
-                if position != -1:
-                    result[b] = mono_stack[position][1]
-    
-        # find the smallest element that is greater than height
-        # 7, 5, 5, 5, 2 => 5
-        def findLeftMostElementThatIsGreatherThan(height):
-            if not mono_stack:
+        def findLeftMostElementThatIsGreaterThanOrEqual(target):
+            if not mono:
                 return -1
-    
-            left, right = 0, len(mono_stack) - 1
-            ans = -1
+
+            left, right = 0, len(mono) - 1
             while left + 1 < right:
                 mid = (left + right) // 2
-                if mono_stack[mid][0] <= height:
+
+                if mono[mid][0] <= target:
                     right = mid
                 else:
                     left = mid
-            
-            if mono_stack[right][0] > height:
+            if mono[right][0] > target:
                 return right
-            elif mono_stack[left][0] > height:
+            elif mono[left][0] > target:
                 return left
             else:
                 return -1
 
-    
-        mono_stack = [] # ?? largest to smallest 7, 2
-        for i in range(len(heights) - 1, -1, -1):
-            build_answer(i)
-            while mono_stack and mono_stack[-1][0] <= heights[i]:
-                mono_stack.pop()
-            mono_stack.append((heights[i], i))
-        return result
+        def buildAns(i):
+            for height, qIdx in newQueries[i]:
+                pos = findLeftMostElementThatIsGreaterThanOrEqual(height)
+                if pos != -1:
+                    res[qIdx] = mono[pos][1]
 
+        mono = []
+        for i in range(len(newQueries) - 1, -1, -1):
+            buildAns(i)
+            while mono and mono[-1][0] <= heights[i]:
+                mono.pop()
+            mono += [(heights[i], i)]
+            # print(mono)
+        # print(newQueries)
+        return res
