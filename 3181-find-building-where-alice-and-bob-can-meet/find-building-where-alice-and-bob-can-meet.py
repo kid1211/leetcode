@@ -18,7 +18,7 @@ class Solution:
             mono_stack_size = len(mono_stack)
             for a, b in new_queries[i]:
                 position = findLeftMostElementThatIsGreatherThan(a) 
-                if position >= 0:
+                if position != -1:
                     result[b] = mono_stack[position][1]
     
         # find the smallest element that is greater than height
