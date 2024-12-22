@@ -31,12 +31,10 @@ class Solution:
             while left + 1 < right:
                 mid = (left + right) // 2
 
-                if mono_stack[mid][0] == height:
+                if mono_stack[mid][0] <= height:
                     right = mid
-                elif mono_stack[mid][0] > height:
-                    left = mid
                 else:
-                    right = mid
+                    left = mid
             
             if mono_stack[right][0] > height:
                 return right
