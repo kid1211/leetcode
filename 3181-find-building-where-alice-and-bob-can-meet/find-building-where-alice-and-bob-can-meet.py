@@ -1,6 +1,5 @@
 class Solution:
     def leftmostBuildingQueries(self, heights: List[int], queries: List[List[int]]) -> List[int]:
-        # if not queries
 
         res = [ -1 for _ in range(len(queries))]
         # rearrange the queries base on the idx of right element
@@ -12,34 +11,36 @@ class Solution:
 
             if a > b:
                 a, b = b, a
-            
+
             if heights[b] > heights[a] or a == b:
                 res[i] = b
             else:
                 newQueries[b] += [(heights[a], i)]
 
-        def findLeftMostElementThatIsGreaterThanOrEqual(target):
+        def findElementThatIsGreaterThan(target):
             if not mono:
                 return -1
-
+            # [7,6,5,5,4,3,2] target 5
             left, right = 0, len(mono) - 1
             while left + 1 < right:
                 mid = (left + right) // 2
 
-                if mono[mid][0] <= target:
-                    right = mid
-                else:
+                if mono[mid][0] > target:
                     left = mid
+                else:
+                    # Equal is not an answer
+                    right = mid
+
             if mono[right][0] > target:
                 return right
             elif mono[left][0] > target:
                 return left
             else:
                 return -1
-
+    
         def buildAns(i):
             for height, qIdx in newQueries[i]:
-                pos = findLeftMostElementThatIsGreaterThanOrEqual(height)
+                pos = findElementThatIsGreaterThan(height)
                 if pos != -1:
                     res[qIdx] = mono[pos][1]
 
