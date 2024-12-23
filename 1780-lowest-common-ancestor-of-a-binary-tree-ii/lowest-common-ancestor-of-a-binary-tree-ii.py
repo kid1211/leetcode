@@ -8,18 +8,19 @@
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         res = None
-
         def dfs(root):
             nonlocal res
-            if not root:
-                return None
 
+            if not root:
+                return root
+            
             left = dfs(root.left)
             right = dfs(root.right)
 
-            nodeSet = set([root, left, right])
+            isPFound = root == p or left == p or right == p
+            isQFound = root == q or left == q or right == q
 
-            if p in nodeSet and q in nodeSet:
+            if isPFound and isQFound:
                 res = root
                 return root
             
@@ -27,9 +28,7 @@ class Solution:
                 return left
             if right == p or right == q:
                 return right
-            if root == p or root == q:
-                return root
-            return None
-            
+            return root
+
         dfs(root)
         return res
