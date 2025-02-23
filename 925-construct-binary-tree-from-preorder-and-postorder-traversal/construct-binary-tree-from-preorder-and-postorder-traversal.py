@@ -8,29 +8,19 @@ class Solution:
     def constructFromPrePost(self, preorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
         if not preorder:
             return None
-        
+
         if len(preorder) == 1:
             return TreeNode(preorder[0])
-        
-        if len(preorder) == 2:
-            left = TreeNode(preorder[1])
-            return TreeNode(preorder[0], left)
-        
-        # if len(preorder) == 3:
-        #     if preorder[1:] == postorder[:2]:
-        #         left = TreeNode(preorder[1])
-        #         right = TreeNode(preorder[2])
-        #     else:
-        #         deeperLeft = TreeNode(preorder[2])
-        #         left = TreeNode(preorder[1], deeperLeft)
-        #         right = None
-        #     return TreeNode(preorder[0], left, right)
+
+        # if len(preorder) == 2:
+        #     left = TreeNode(preorder[1])
+        #     return TreeNode(preorder[0], left)
 
         leftChildLen = None
         for i in range(len(postorder) - 1):
             if postorder[i] == preorder[1]:
                 leftChildLen = i + 1
-        
+
         if leftChildLen is None:
             print('should never happen', preorder, leftChildLen)
             return None
