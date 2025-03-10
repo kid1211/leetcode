@@ -5,14 +5,17 @@ class Solution:
             nonlocal left
             if not char:
                 return
-            if length == 1:
-                chars[left] = char
-                left += 1
-                return
+            # if length == 1:
+            #     chars[left] = char
+            #     left += 1
+            #     return
 
             for d in [char] + list(str(length)):
                 chars[left] = d
                 left += 1
+
+                if length == 1:
+                    return
 
         lastChar = None
         lastLength = 0
