@@ -4,4 +4,4 @@ class Solution:
         # print(u1, u2)
         if set(u1.keys()) != set(u2.keys()):
             return False
-        return sorted(u1.values()) == sorted(u2.values())
+        return Counter(u1.values()) == Counter(u2.values())
