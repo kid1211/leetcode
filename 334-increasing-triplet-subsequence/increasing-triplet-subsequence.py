@@ -9,7 +9,7 @@ class Solution:
             elif num <= j:
                 j = num
 
-            if num > j:
+            else:
                 return True
             # print("after:", i, j, k, num)
         return False
