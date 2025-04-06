@@ -15,10 +15,7 @@ class Solution:
             res = max(res, step)
 
             dfs(node.left if isLeft else node.right, not isLeft, step + 1)
-            if isLeft:
-                dfs(node.right, isLeft, 1)
-            else:
-                dfs(node.left, isLeft, 1)
+            dfs(node.right if isLeft else node.left, isLeft, 1)
 
         dfs(root, True, 0)
         return res
