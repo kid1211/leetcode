@@ -7,9 +7,8 @@
 class Solution:
     def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
         res = 0
-
         hashmap = defaultdict(int)
-        # hashmap[root.val - targetSum] += 1
+        hashmap[0] = 1
 
         def dfs(node, curr):
             nonlocal res
@@ -19,11 +18,10 @@ class Solution:
             curr += node.val
 
             # One special case
-            if curr == targetSum:
-                res += 1
-            
-            res += hashmap[curr - targetSum]
+            # if curr == targetSum:
+            #     res += 1
 
+            res += hashmap[curr - targetSum]
 
             hashmap[curr] += 1
             dfs(node.left, curr)
