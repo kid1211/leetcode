@@ -19,8 +19,10 @@ class Solution:
                 return list(mapping[digits[idx]])
 
             res = []
-            for l in mapping[digits[idx]]:
-                for suffix in dfs(idx + 1):
+            suffixes = dfs(idx + 1)
+    
+            for suffix in suffixes:
+                for l in mapping[digits[idx]]:
                     res += [l + suffix]
             return res
 
