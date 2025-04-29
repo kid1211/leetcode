@@ -1,32 +1,28 @@
 class Solution:
     def countSubarrays(self, nums: List[int], k: int) -> int:
         maxElement = max(nums)
-        counter = defaultdict(int)
+        maxCount = 0
+        
 
         left = res = 0
         for right in range(len(nums)):
-            counter[nums[right]] += 1
-            while left <= right and counter[maxElement] == k:
-                counter[nums[left]] -= 1
+            if nums[right] == maxElement:
+                maxCount += 1
+
+            while left <= right and maxCount == k:
+                if nums[left] == maxElement:
+                    maxCount -= 1
                 left += 1
-            # if counter[maxElement] >= k:
-            #     print(left, right)
             res += left
-                
-        # 1, 3
         return res
 
-# class Solution:
-#     def countSubarrays(self, nums: List[int], k: int) -> int:
-#         max_element = max(nums)
-#         ans = start = max_elements_in_window = 0
+# 0 1 2  3 4  5 6 7 8  9 10 11 12 13 14
+# 4 3 7 10 2 10 1 6 10 7 10 10  9  8  3, k = 3, max=10
+# LS    LE          R
+# From LS-LE for starting point are all valid
+# so res += 4
 
-#         for end in range(len(nums)):
-#             if nums[end] == max_element:
-#                 max_elements_in_window += 1
-#             while max_elements_in_window == k:
-#                 if nums[start] == max_element:
-#                     max_elements_in_window -= 1
-#                 start += 1
-#             ans += start
-#         return ans
+# 0 1 2  3 4  5 6 7 8  9 10 11 12 13 14
+# 4 3 7 10 2 10 1 6 10 7 10 10  9  8  3, k = 3, max=10
+#        L           R
+# res += 2 * 2
