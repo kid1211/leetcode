@@ -29,7 +29,7 @@ class Solution:
                     continue
                 visited.add(nextNode)
                 temp = dfs(nextNode, end, visited)
-                visited.remove(nextNode)
+                # visited.remove(nextNode)
 
                 if temp == -1.0:
                     continue
