@@ -1,7 +1,4 @@
-# 1. valley point is easy, it will always be 1 at the valley
-# 2. however local peak is diffcult in the sense that, it is determined by both side
 
-# with that in mind, that is why, we can finally calculate or finalized the assignment after we gone through a segment that increase first then decrease, or in other word, both side of the local peak. Only then, we can knoow what is the peak, which subsequently finalized how we asign value.
 
 # I think this is it, do you understand what I am saying? if so, summarized all the things in this sesession, and explain to me why we count inc first then dec
 class Solution:
@@ -14,5 +11,7 @@ class Solution:
                 ret[i] = ret[i - 1] + 1
         for i in range(len(ratings) - 2, -1, -1):
             if ratings[i] > ratings[i + 1]:
+                # ret[i] = ret[i + 1] + 1 
                 ret[i] = max(ret[i], ret[i + 1] + 1)
+                # [12,4,3, 11, 34, 34, 1, 67]
         return sum(ret)
