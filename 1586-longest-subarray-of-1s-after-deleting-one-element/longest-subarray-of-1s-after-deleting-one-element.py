@@ -9,9 +9,10 @@ class Solution:
                 if nums[j] == 0:
                     hasZero = True
                 j += 1
+    
             res = max(
                 res,
-                j - i - 1 if hasZero else j - i - 1
+                j - i - 1
             )
 
             if nums[i] == 0:
