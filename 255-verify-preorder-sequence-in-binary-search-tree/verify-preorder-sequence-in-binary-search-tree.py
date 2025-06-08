@@ -6,12 +6,12 @@ class Solution:
                 return curr, True
             # exit?
 
-            root = preorder[curr]
-            if not mini <= root <= maxi:
+            rootVal = preorder[curr]
+            if not mini <= rootVal <= maxi:
                 return curr, False
 
-            leftEnd, left = dfs(curr + 1, mini, root)
-            rightEnd, right = dfs(leftEnd, root, maxi)
+            leftEnd, left = dfs(curr + 1, mini, rootVal)
+            rightEnd, right = dfs(leftEnd, rootVal, maxi)
 
             return rightEnd, left or right
         
