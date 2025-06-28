@@ -19,12 +19,10 @@ class Solution:
             i -= 1
 
         # 2
-        for j in range(n - 1, -1, -1):
-            if nums[j] > nums[i]:
-                break
-
-        # print(i, j, n, nums[i], nums[j])
         if i != -1:
+            for j in range(n - 1, -1, -1):
+                if nums[j] > nums[i]:
+                    break
             nums[i], nums[j] = nums[j], nums[i]
 
         # 3
