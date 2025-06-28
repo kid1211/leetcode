@@ -11,5 +11,4 @@ class Solution:
                 nums[i], nums[j] = nums[j], nums[i]
                 j += 1
                 last_update = max(last_update, i)
-        print(last_update)
-        return last_update + 1 if last_update != -1 else i
+        return last_update + 1
