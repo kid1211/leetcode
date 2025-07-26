@@ -1,16 +1,19 @@
 class Solution:
     def trap(self, height: List[int]) -> int:
-        left, right = 0, len(height) - 1
-        leftMax, rightMax = height[left], height[right]
+        stack = []
         res = 0
+        # height += [0] # add last just in case, actually no
+        # equal sign
 
-        while left < right:
-            if height[left] < height[right]:
-                leftMax = max(leftMax, height[left])
-                res += leftMax - height[left]
-                left += 1
-            else:
-                rightMax = max(rightMax, height[right])
-                res += rightMax - height[right]
-                right -= 1
+        for i in range(len(height)):
+            while stack and height[i] > height[stack[-1]]:
+                popped = stack.pop()
+                if not stack:
+                    break
+                distance = i - stack[-1] - 1
+                curr_height = min(height[i], height[stack[-1]]) - height[popped]
+                res += distance * curr_height
+            stack += [i]
+        
         return res
+            # pop and calculate
