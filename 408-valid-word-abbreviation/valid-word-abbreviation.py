@@ -11,9 +11,7 @@ class Solution:
                 number += [c]
                 continue
 
-            if not number and (j >= len(word) or abbr[i] != word[j]):
-                return False
-            elif number and number[0] == "0":
+            if number and number[0] == "0":
                 return False
     
             tmp = int("".join(number)) if number else 0
