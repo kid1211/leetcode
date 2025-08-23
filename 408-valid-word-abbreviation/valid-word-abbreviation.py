@@ -13,17 +13,14 @@ class Solution:
 
             if not number and (j >= len(word) or abbr[i] != word[j]):
                 return False
-            elif len(number) > 0 and  number[0] == "0":
+            elif number and number[0] == "0":
                 return False
     
             tmp = int("".join(number)) if number else 0
-            # print('number', number)
             j += tmp
-            # print(tmp, (i, abbr[i]), (j, word[j]))
             if j >= len(word) or abbr[i] != word[j]:
                 return False
             j += 1
             number = []
-        # print(j, len(word), number)
-        # tmp = int("".join(number)) if number else 0
+
         return len(word) == j
