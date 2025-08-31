@@ -1,3 +1,9 @@
+# Trible 1
+    #    if self.w[left] >= target:
+    #         return left
+    #     else:
+    #         return right
+# Trible 2, uniform
 class Solution:
 
     def __init__(self, w: List[int]):
@@ -19,7 +25,7 @@ class Solution:
                 left = mid
             else:
                 right = mid
-        
+        # [1, 5, 15, 17,20]
         if self.w[left] >= target:
             return left
         else:
