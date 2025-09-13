@@ -3,17 +3,18 @@ class Solution:
         """
         Do not return anything, modify nums1 in-place instead.
         """
-        i, j = m - 1, n - 1
-        k = m + n - 1
-        while k >= 0:
-            n1 = nums1[i] if i >= 0 else -sys.maxsize
-            n2 = nums2[j] if j >= 0 else -sys.maxsize
-            if n1 > n2:
-                val = nums1[i]
-                i -= 1
-            else:
-                val = nums2[j]
-                j -= 1
-            nums1[k] = val
-            k -= 1
+        l, r = m - 1, n - 1
+        idx = m + n - 1
 
+        while l >= 0 or r >= 0:
+            lVal = nums1[l] if l >= 0 else -sys.maxsize
+            rVal = nums2[r] if r >= 0 else -sys.maxsize
+
+            if lVal > rVal:
+                nums1[idx] = lVal
+                l -= 1
+            else:
+                nums1[idx] = rVal
+                r -= 1
+            idx -= 1
+        
