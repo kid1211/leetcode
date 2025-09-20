@@ -7,48 +7,50 @@ class Node:
 class LRUCache:
 
     def __init__(self, capacity: int):
-        self.size = capacity
-        self.key2Prev = {}
+        self.capacity = capacity
+        #  head - node - recent
         self.recent = self.head = Node(-1, -1)
+        self.key2Prev = {}
 
     def get(self, key: int) -> int:
         if key not in self.key2Prev:
             return -1
         self.move2Recent(key)
         return self.recent.val
-
-    def put(self, key: int, value: int) -> None:
-        if key in self.key2Prev:
-            self.move2Recent(key)
-            self.recent.val = value
-        else:
-            self.addNew(key, value)
-    
+        
     def move2Recent(self, key):
         if key == self.recent.key:
             return
         self.addNew(key, self.pop(key))
 
-    
     def addNew(self, key, val):
         node = Node(key, val)
 
-        self.key2Prev[key] = self.recent
         self.recent.next = node
+        self.key2Prev[key] = self.recent
         self.recent = node
 
-        if len(self.key2Prev) > self.size:
+        if len(self.key2Prev) > self.capacity:
             self.pop(self.head.next.key)
     
-    def pop(self, key) -> int:
-        prev = self.key2Prev[key]
-        res = prev.next.val
+    def pop(self, key):
+        prevNode = self.key2Prev[key]
+        res = prevNode.next.val
 
         del self.key2Prev[key]
-        prev.next = prev.next.next
-        self.key2Prev[prev.next.key] = prev
+        prevNode.next = prevNode.next.next
+        self.key2Prev[prevNode.next.key] = prevNode 
 
         return res
+
+    
+    def put(self, key: int, value: int) -> None:
+        if key not in self.key2Prev:
+            self.addNew(key, value)
+        else:
+            self.move2Recent(key)
+            self.recent.val = value
+        
 
 
 # Your LRUCache object will be instantiated and called as such:
