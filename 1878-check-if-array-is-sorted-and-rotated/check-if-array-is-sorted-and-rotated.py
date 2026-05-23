@@ -1,17 +1,20 @@
 class Solution:
     def check(self, nums: List[int]) -> bool:
-        if not nums:
+        n = len(nums)
+        if n <= 1:
             return True
-        start = nums[0]
-        flipped = False
 
-        for i in range(1, len(nums)):
-            if nums[i] >= nums[i - 1]:
-                if flipped and nums[i] > start:
+        inversion_count = 0
+
+        # For every pair, count the number of inversions.
+        for index in range(1, n):
+            if nums[index] < nums[index - 1]:
+                inversion_count += 1
+                if inversion_count > 1:
                     return False
-                continue
-            elif flipped or nums[i] > start:
-                return False
-            else:
-                flipped = True
-        return True
+
+        # Also check between the last and the first element due to rotation
+        if nums[0] < nums[n - 1]:
+            inversion_count += 1
+
+        return inversion_count <= 1
